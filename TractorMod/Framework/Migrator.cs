@@ -27,7 +27,7 @@ namespace Pathoschild.Stardew.TractorMod.Framework
         private static string LegacySaveDataRelativePath => Path.Combine("data", $"{Constants.SaveFolderName}.json");
 
         /// <summary>The actions to perform when the current session is saved.</summary>
-        private static readonly List<Action> OnSaved = new();
+        private static readonly List<Action> OnSaved = new List<Action>();
 
 
         /*********
@@ -49,7 +49,7 @@ namespace Pathoschild.Stardew.TractorMod.Framework
 
             // get info
             ISemanticVersion lastVersion = Migrator.GetVersion(Migrator.LastVersionKey) ?? new SemanticVersion(4, 6, 0);
-            Lazy<BuildableGameLocation[]> buildableLocations = new(() => CommonHelper.GetLocations().OfType<BuildableGameLocation>().ToArray());
+            Lazy<BuildableGameLocation[]> buildableLocations = new Lazy<BuildableGameLocation[]>(() => CommonHelper.GetLocations().OfType<BuildableGameLocation>().ToArray());
 
             // apply migrations
             if (lastVersion.IsOlderThan("4.7.0"))

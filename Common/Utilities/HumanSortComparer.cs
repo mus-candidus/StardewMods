@@ -117,7 +117,7 @@ namespace Common.Utilities
             // read sequence
             raw = str.Substring(start, position - start);
             numeric = isNumeric && long.TryParse(raw, out long parsedNumeric)
-                ? parsedNumeric
+                ? parsedNumeric as long?
                 : null;
         }
     }

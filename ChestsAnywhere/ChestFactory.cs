@@ -376,12 +376,17 @@ namespace Pathoschild.Stardew.ChestsAnywhere
             if (!this.EnableShippingBin)
                 return false;
 
-            return location switch
+            bool retval = false;
+            if (location is Farm)
             {
-                Farm => true,
-                IslandWest islandFarm => islandFarm.farmhouseRestored.Value,
-                _ => false
-            };
+                retval = true;
+            }
+            else if (location is IslandWest islandFarm)
+            {
+                retval = islandFarm.farmhouseRestored.Value;
+            }
+
+            return retval;
         }
     }
 }
